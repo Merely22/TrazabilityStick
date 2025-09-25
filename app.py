@@ -8,8 +8,8 @@ import io
 import plotly.express as px
 import plotly.graph_objects as go 
 #========================================================================================
-st.set_page_config(page_title="Dashboard Trazability TKI", layout="wide")
-st.title("📊 Trazability TKI - ECHO")
+st.set_page_config(page_title="Dashboard Trazability STICK", layout="wide")
+st.title("📊 Trazability STICK ")
 
 # Autenticación con Google Sheets
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
@@ -19,8 +19,8 @@ credentials = service_account.Credentials.from_service_account_info(
 service = build("sheets", "v4", credentials=credentials)
 
 # ID de la hoja y nombre de la hoja
-SPREADSHEET_ID = "1AHWD_mg0X1G0uvuuPvNo0GcnndWe6toBMLs2cJ4usB4"
-SHEET_NAME = "Echo" # changed pending
+SPREADSHEET_ID = "1j8ZSrj2nRZgBp5F6c03dxN7GLqCki2M8vWEX8kICB8M"
+SHEET_NAME = "STICKB1" # changed pending
 
 @st.cache_data(ttl=60) # actualiza cada 60 segundos
 def load_data(): 
@@ -70,8 +70,23 @@ for col in date_columns:
 
 #  build a dictionary with observations
 observaciones = [
-    'does not charge', 'restart', 'recognized', 
-    'no charge iphone', 'no com port detected', 'no satelites in view']
+    "no recibe mensajes",
+    "no envia mensajes",
+    "no recibe correcciones",
+    "datos faltantes",
+    "bluetooth",
+    "pierde conexión",
+    "no converge",
+    "se apagó",
+    "no enciende",
+    "cortes",
+    "conector",
+    "cabezal",
+    "ublox",
+    "bug microcontrolador",
+    "error satélites",
+    "led"
+]
 
 # build a df and clean column observations 
 df['Observations_lower'] = df['Observations'].str.lower().fillna('')
@@ -145,7 +160,7 @@ with col_obs1:
 with col_obs2:
     st.subheader("Estado actual de equipos Observados")
     st.dataframe(
-        df_obs[['MAC', 'BATCH', 'Estado_Observacion', 'Etapa_Actual', 'Observations']],
+        df_obs[['MAC','Estado_Observacion', 'Etapa_Actual']],
         use_container_width=True
     )
 
