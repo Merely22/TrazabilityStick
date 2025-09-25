@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import numpy as np # Importamos numpy, es muy útil para condiciones
+import numpy as np 
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from datetime import datetime
@@ -14,8 +14,7 @@ st.title("📊 Trazability STICK ")
 # Autenticación con Google Sheets
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 credentials = service_account.Credentials.from_service_account_info(
-    st.secrets, scopes=SCOPES
-)
+    st.secrets, scopes=SCOPES)
 service = build("sheets", "v4", credentials=credentials)
 
 # ID de la hoja y nombre de la hoja
